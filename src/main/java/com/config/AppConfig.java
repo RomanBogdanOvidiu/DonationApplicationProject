@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -34,54 +33,50 @@ import org.springframework.web.servlet.view.JstlView;
 public class AppConfig {
 
 	@Bean
-    public SessionFactory sessionFactory() {
-        LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
-        builder
-        	.scanPackages("com.users.model")
-            .addProperties(getHibernateProperties());
+	public SessionFactory sessionFactory() {
+		LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
+		builder.scanPackages("com.users.model").addProperties(getHibernateProperties());
 
-        return builder.buildSessionFactory();
-    }
+		return builder.buildSessionFactory();
+	}
 
 	private Properties getHibernateProperties() {
-        Properties prop = new Properties();
-        prop.put("hibernate.format_sql", "true");
-        prop.put("hibernate.show_sql", "true");
-        prop.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-        prop.put("hibernate.hbm2ddl.auto", "update");
-        return prop;
-    }
-	
+		Properties prop = new Properties();
+		prop.put("hibernate.format_sql", "true");
+		prop.put("hibernate.show_sql", "true");
+		prop.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+		prop.put("hibernate.hbm2ddl.auto", "update");
+		return prop;
+	}
+
 	@Bean(name = "dataSource")
 	public BasicDataSource dataSource() {
-		
+
 		BasicDataSource ds = new BasicDataSource();
-	    ds.setDriverClassName("com.mysql.jdbc.Driver");
+		ds.setDriverClassName("com.mysql.jdbc.Driver");
 		ds.setUrl("jdbc:mysql://localhost:3306/bank");
 		ds.setUsername("root");
 		ds.setPassword("B0gd@n94");
 		return ds;
 	}
-	
 
-	
- 
 	@Bean
 	public EntityManager entityManager() {
-	    return entityManagerFactory().getObject().createEntityManager();
+		return entityManagerFactory().getObject().createEntityManager();
 	}
+
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-	    LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-	    em.setDataSource(dataSource());
-	    em.setPackagesToScan("com.users.model");
-	    
-	    JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-	      em.setJpaVendorAdapter(vendorAdapter);
-	      em.setJpaProperties(getHibernateProperties());
-	    return em;
+		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(dataSource());
+		em.setPackagesToScan("com.users.model");
+
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		em.setJpaVendorAdapter(vendorAdapter);
+		em.setJpaProperties(getHibernateProperties());
+		return em;
 	}
-	
+
 	@Primary
 	@Bean
 	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
@@ -91,7 +86,6 @@ public class AppConfig {
 		return transactionManager;
 	}
 
-		
 	@Bean
 	public InternalResourceViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -100,5 +94,5 @@ public class AppConfig {
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;
 	}
-	
+
 }

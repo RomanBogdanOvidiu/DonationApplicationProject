@@ -5,8 +5,8 @@
 <body>
 	<h1>Title : ${title}</h1>
 	<h1>Message : ${message}</h1>
-	
-	
+
+
 	<sec:authorize access="hasRole('ROLE_USER')">
 		<!-- For login user -->
 		<c:url value="/logout" var="logoutUrl" />
@@ -14,6 +14,13 @@
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 		</form>
+		<a href="${pageContext.request.contextPath}/account">Create new
+			Bank Account</a>
+
+		<a href="${pageContext.request.contextPath}/client">Create new
+			Client</a>
+			
+		<a href="${pageContext.request.contextPath}/clientlist">Edit/Remove/View Client</a>
 		<script>
 			function formSubmit() {
 				document.getElementById("logoutForm").submit();
@@ -29,11 +36,12 @@
 
 
 	</sec:authorize>
-	<sec:authorize access="!hasRole('ROLE_USER') && !hasRole('ROLE_ADMIN') ">
+	<sec:authorize
+		access="!hasRole('ROLE_USER') && !hasRole('ROLE_ADMIN') ">
 		<a href="${pageContext.request.contextPath}/login">Login</a>
 		<a href="${pageContext.request.contextPath}/signUp">Sign Up</a>
-	
-	
+
+
 	</sec:authorize>
 </body>
 </html>

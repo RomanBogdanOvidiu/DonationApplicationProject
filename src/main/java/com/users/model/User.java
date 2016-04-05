@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -15,10 +14,6 @@ import javax.persistence.Table;
 @Table(name = "users", catalog = "bank")
 public class User {
 
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
 	private String username;
 	private String password;
 	private boolean enabled;
@@ -27,7 +22,11 @@ public class User {
 	public User() {
 	}
 
-
+	// public Integer incrementId(Integer id)
+	// {
+	// this.id=1+id;
+	// return id;
+	// }
 	public User(String username, String password, boolean enabled) {
 		this.username = username;
 		this.password = password;
@@ -78,15 +77,4 @@ public class User {
 		this.userRole = userRole;
 	}
 
-
-	public Integer getId() {
-		return id;
-	}
-
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	
 }
