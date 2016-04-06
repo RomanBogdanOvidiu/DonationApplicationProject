@@ -2,6 +2,7 @@ package com.users.model;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+
 import com.users.model.Client;
 
 @Entity
@@ -20,43 +24,43 @@ public class Account {
 	@Id
 	@SequenceGenerator(name = "seq", initialValue = 1, allocationSize = 100)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID", unique = true, nullable = false, length = 45)
-	private int ID;
+	@Column(name = "id", unique = true, nullable = false, length = 45)
+	private int id;
 
 	private double amount;
-	private double lastAmountOfInterestEarned = 30.0;
-	private String password;
 	@ManyToOne
-	@JoinColumn(name = "Client_ID")
+	@JoinColumn(name = "clientid")
 	private Client client;
-	private Date date;
+	
+	private int date;
 
 
+	public int getDate() {
+		return date;
+	}
+
+	public void setDate(int date) {
+		this.date = date;
+	}
+
+	
 	public Account() {
 	}
 
 	public Account( double amout, int id) {
-		this.ID = id;
+		this.id = id;
 		this.amount = amout;
 
 	}
 	
 
-	@Column(name = "password", unique = true, nullable = false, length = 45)
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	
 	public int getId() {
-		return ID;
+		return id;
 	}
 
 	public void setId(int id) {
-		this.ID = id;
+		this.id = id;
 	}
 
 	@Column(name = "Amount", unique = false, nullable = false, length = 45)
@@ -70,7 +74,7 @@ public class Account {
 
 	public void withdraw(double withdrawAmount) {
 		assert amount > 0 : "Out of money";
-		amount -= withdrawAmount + lastAmountOfInterestEarned;
+		amount -= withdrawAmount ;
 	}
 
 	public void deposit(double depositAmount) {

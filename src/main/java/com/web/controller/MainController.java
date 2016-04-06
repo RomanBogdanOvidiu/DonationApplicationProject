@@ -36,9 +36,10 @@ public class MainController {
 
 	@Autowired
 	protected UserService userService;
+
 	@Autowired
 	protected AccountService accountService;
-	
+
 	@Autowired
 	protected ClientService clientService;
 
@@ -153,41 +154,51 @@ public class MainController {
 		return "redirect:/BankA1/hello";
 	}
 
-	@RequestMapping(value = "/account", method = RequestMethod.GET)
-	public ModelAndView accountC() {
+	@RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
+	public ModelAndView accountC(@PathVariable("id") Integer id) {
 		ModelAndView forSignUp = new ModelAndView();
 		forSignUp.addObject("title", "Bank Application");
 		forSignUp.addObject("message", "Create new bank account");
+		Client client = clientService.findById(id);
+
 		Account acc1 = new Account();
+
+		acc1.setClient(client);
+
 		forSignUp.addObject("account", acc1);
 		forSignUp.setViewName("account");
-		return forSignUp; 
+		return forSignUp;
 	}
 
-	@RequestMapping(value = "/account", method = RequestMethod.POST)
-	public ModelAndView accountC1(Account a1) {
+	@RequestMapping(value = "/account/{id}", method = RequestMethod.POST)
+	public ModelAndView accountC1(Account a1, @PathVariable ("id") Integer clientId) {
 		ModelAndView sucCreated = new ModelAndView();
-		// if(a1.getCNP().length() != 12){getErrorMessage(request,
-		// a1.getCNP());}
+		
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$4" + a1.getClient().getId());
+		
+		Client c = clientService.findById(clientId);
+		a1.setClient(c);
+		c.getAcc().add(a1);
+		clientService.insert(c);
 		accountService.insert(a1);
-		sucCreated.setViewName("sucCreated");
+		sucCreated.setViewName("redirect:/client/account/");
 		return sucCreated;
 	}
-	
+
 	@RequestMapping(value = "/client", method = RequestMethod.GET)
 	public ModelAndView createClient() {
 		ModelAndView forSignUp = new ModelAndView();
 		forSignUp.addObject("title", "Bank Application");
 		forSignUp.addObject("message", "Create new bank account");
 		Client c1 = new Client();
-		
+
 		forSignUp.addObject("client", c1);
 		forSignUp.setViewName("client");
 		return forSignUp;
 	}
-	
+
 	@RequestMapping(value = "/client/edit/{id}", method = RequestMethod.GET)
-	public ModelAndView clientEdit(@PathVariable("id" )Integer id) {
+	public ModelAndView clientEdit(@PathVariable("id") Integer id) {
 		ModelAndView forSignUp = new ModelAndView();
 		forSignUp.addObject("title", "Bank Application");
 		forSignUp.addObject("message", "Create new bank account");
@@ -201,30 +212,49 @@ public class MainController {
 	@RequestMapping(value = "/client", method = RequestMethod.POST)
 	public ModelAndView createClient(Client c1) {
 		ModelAndView sucCreated = new ModelAndView();
-		System.out.println(c1.getFirstName()+ " " + c1.getAddress() +" "+c1.getId()+" "+ c1.getCnp()+c1.getLastName());
+		System.out.println(
+				c1.getFirstName() + " " + c1.getAddress() + " " + c1.getId() + " " + c1.getCnp() + c1.getLastName());
 		clientService.insert(c1);
 		sucCreated.setViewName("redirect:/clientlist");
 		return sucCreated;
 	}
-	
+
 	@RequestMapping(value = "/clientlist", method = RequestMethod.GET)
 	public ModelAndView clist() {
 		ModelAndView forSignUp = new ModelAndView();
 		forSignUp.addObject("title", "Bank Application");
 		forSignUp.addObject("message", "Create new bank account");
-		List<Client> c1=clientService.findAll();
+		List<Client> c1 = clientService.findAll();
 		forSignUp.addObject("clients", c1);
 		forSignUp.setViewName("clientlist");
 		return forSignUp;
 	}
-	
-	 @RequestMapping(value = "/client/delete/{id}",method = RequestMethod.POST)
-	    public String delete( @PathVariable("id") Integer id){
-		 clientService.deleteById(id);
 
-	        return "redirect:/clientlist";
-	    }
-		 
-	 }
-	
+	@RequestMapping(value = "/client/delete/{id}", method = RequestMethod.GET)
+	public String delete(@PathVariable("id") Integer id) {
+		clientService.deleteById(id);
 
+		return "redirect:/clientlist";
+	}
+
+	@RequestMapping(value = "/client/account/{id}", method = RequestMethod.GET)
+	public ModelAndView connectAccClient(@PathVariable("id") Integer id) {
+		ModelAndView forSignUp = new ModelAndView();
+		forSignUp.addObject("title", "Bank Application");
+		forSignUp.addObject("message", "Manage Bank Account ");
+		Client client = clientService.findById(id);
+		List<Account> acc = accountService.findByClient(client);
+		forSignUp.addObject("accounts", acc);
+		forSignUp.addObject("client", id);
+		forSignUp.setViewName("clientaccount");
+
+		return forSignUp;
+
+	}
+	@RequestMapping(value = "/clientaccount/delete/{id}", method = RequestMethod.GET)
+	public String deleteAccount(@PathVariable("id") Integer id) {
+		accountService.deleteById(id);
+
+		return "redirect:/clientaccount";
+	}
+}

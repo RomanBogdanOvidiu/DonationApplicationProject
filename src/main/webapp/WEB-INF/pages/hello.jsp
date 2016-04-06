@@ -14,9 +14,7 @@
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 		</form>
-		<a href="${pageContext.request.contextPath}/account">Create new
-			Bank Account</a>
-
+		
 		<a href="${pageContext.request.contextPath}/client">Create new
 			Client</a>
 			
