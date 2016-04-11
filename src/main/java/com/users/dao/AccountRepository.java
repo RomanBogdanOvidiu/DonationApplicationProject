@@ -12,4 +12,8 @@ import com.users.model.Client;
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
 	List<Account> findByClient(Client client);
+
+	Account findByAccountNo(String id);
+
+	Account findById(Integer id);
 }

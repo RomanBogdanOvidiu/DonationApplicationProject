@@ -6,6 +6,7 @@
     <c:param name="body">
         <p>
             <a href='${pageContext.request.contextPath}/account/${client}' class="btn btn-info">CREATE ACCOUNT</a>
+             <a href='${pageContext.request.contextPath}/bills/${client}' class="btn btn-info">PayBill</a>
         </p>
         <table
             class="table table-striped table-bordered table-condensed">
@@ -13,6 +14,7 @@
                 <th>ID</th>
                 <th>Amount</th>
                 <th>Date</th>
+                 <th>AccountNumber</th>
                 <th>ClientId</th>
                 <th>&nbsp;</th>
             </tr>
@@ -21,12 +23,16 @@
                     <td>${(account.id)}</td>
                     <td>${(account.amount)}</td>
                     <td>${(account.date)}</td>
-                    <td>${(account.clientid)}</td>
+                    <td>${(account.accountNo)}</td>
+                    <td>${(account.client.id)}</td>
+                    
                     <td><a
-                        href='${pageContext.request.contextPath}/clientaccount/edit/${account.id}'
+                        href='${pageContext.request.contextPath}/client/account/edit/${account.id}'
                         class="btn btn-primary">edit</a> <a
-                        href='${pageContext.request.contextPath}/clientaccount/delete/${account.id}'
-                        class="btn">delete</a> 
+                        href='${pageContext.request.contextPath}/client/account/delete/${account.id}'
+                        class="btn">delete</a> <a
+                        href='${pageContext.request.contextPath}/client/account/transfer/${account.id}'
+                        class="btn">Transfer from this Account</a> 
                         </td>
                         
                       

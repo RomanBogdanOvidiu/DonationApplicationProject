@@ -6,13 +6,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "client", catalog = "bank")
@@ -23,15 +23,19 @@ public class Client {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false, length = 45)
 	private int id;
-	
+
 	private String firstName;
 	private String lastName;
 	private String cnp;
 	private String address;
 
-	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Account> acc = new ArrayList<Account>();
 
+	// @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	// @LazyCollection(LazyCollectionOption.FALSE)
+	// private List<Bills> bill=new ArrayList<Bills>();
+	//
 	public Client() {
 
 	}
@@ -87,7 +91,7 @@ public class Client {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	public List<Account> getAcc() {
 		return acc;
 	}
@@ -95,6 +99,5 @@ public class Client {
 	public void setAcc(List<Account> acc) {
 		this.acc = acc;
 	}
-	
 
 }

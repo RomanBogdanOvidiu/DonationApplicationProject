@@ -7,18 +7,20 @@
 	<h1>Message : ${message}</h1>
 
 
-	<sec:authorize access="hasRole('ROLE_USER')">
+
+	<sec:authorize access="hasRole('ROLE_USER') && hasRole('ROLE_ADMIN')">
 		<!-- For login user -->
 		<c:url value="/logout" var="logoutUrl" />
 		<form action="${logoutUrl}" method="post" id="logoutForm">
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 		</form>
-		
+
 		<a href="${pageContext.request.contextPath}/client">Create new
 			Client</a>
-			
-		<a href="${pageContext.request.contextPath}/clientlist">Edit/Remove/View Client</a>
+
+		<a href="${pageContext.request.contextPath}/clientlist">Edit/Remove/View
+			Client</a>
 		<script>
 			function formSubmit() {
 				document.getElementById("logoutForm").submit();
@@ -32,14 +34,21 @@
 			</h2>
 		</c:if>
 
-
 	</sec:authorize>
+	
 	<sec:authorize
 		access="!hasRole('ROLE_USER') && !hasRole('ROLE_ADMIN') ">
 		<a href="${pageContext.request.contextPath}/login">Login</a>
-		<a href="${pageContext.request.contextPath}/signUp">Sign Up</a>
-
 
 	</sec:authorize>
+
+	<sec:authorize access="hasRole('ROLE_ADMIN') ">
+		<a href="${pageContext.request.contextPath}/signUp">Sign Up</a>
+ 		<a href='${pageContext.request.contextPath}/admin'
+        class="btn btn-primary">Admin page</a>
+	</sec:authorize>
+
+
+
 </body>
 </html>

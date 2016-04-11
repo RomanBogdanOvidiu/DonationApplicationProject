@@ -15,19 +15,30 @@
 			<form:input path="username" cssClass="span3" cssErrorClass="error" />
 
 		</div>
-		<label class="control-label"  for="password"><strong>password</strong></label>
+		<label class="control-label" for="firstName"><strong>FirstName</strong></label>
 		<div class="controls">
-			<form:input path="password" type="password" cssClass="span3" cssErrorClass="error" />
+			<form:input path="firstName" cssClass="span3" cssErrorClass="error" />
+
+		</div>
+		<label class="control-label" for="lastName"><strong>LastName</strong></label>
+		<div class="controls">
+			<form:input path="lastName" cssClass="span3" cssErrorClass="error" />
+
+		</div>
+		<label class="control-label" for="password"><strong>password</strong></label>
+		<div class="controls">
+			<form:input path="password" type="password" cssClass="span3"
+				cssErrorClass="error" />
 		</div>
 
 
 		<input type="submit" class="btn" value="Submit">&nbsp; <a
 			href="${pageContext.request.contextPath}/signUp"></a>
 		<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-				
-		 <form:hidden path="id" />
-			
+			value="${_csrf.token}" />
+
+
+
 	</form:form>
 
 

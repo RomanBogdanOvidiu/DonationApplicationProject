@@ -4,7 +4,11 @@
 <c:import url="/WEB-INF/common/layout.jsp" charEncoding="UTF-8">
     <c:param name="title" value="Client LIST" />
     <c:param name="body">
+    
+    <body>
+        <h1> ${msg}</h1>
         <p>
+       
             <a href='${pageContext.request.contextPath}/client' class="btn btn-info">CREATE</a>
         </p>
         <table
@@ -30,13 +34,14 @@
                         href='${pageContext.request.contextPath}/client/delete/${client.id}'
                         class="btn">delete</a> <a
                         href='${pageContext.request.contextPath}/client/account/${client.id}'
-                        class="btn">ManagaAccount</a></td>
+                        class="btn">ManageAccount</a></td>
                         
                 </tr>
             </c:forEach>
         </table>
 
       
+        </body>
         
     </c:param>
 </c:import>

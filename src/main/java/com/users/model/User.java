@@ -3,6 +3,7 @@ package com.users.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,11 @@ import javax.persistence.Table;
 public class User {
 
 	private String username;
+
+	private String firstName;
+
+	private String lastName;
+	
 	private String password;
 	private boolean enabled;
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
@@ -68,7 +74,7 @@ public class User {
 		this.enabled = enabled;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.REMOVE)
 	public Set<UserRole> getUserRole() {
 		return this.userRole;
 	}
@@ -76,5 +82,23 @@ public class User {
 	public void setUserRole(Set<UserRole> userRole) {
 		this.userRole = userRole;
 	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	
 
 }

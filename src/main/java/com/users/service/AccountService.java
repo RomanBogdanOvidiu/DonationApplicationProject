@@ -12,4 +12,7 @@ public interface AccountService {
 	List<Account> findByClient(Client client);
 	
 	void deleteById(Integer id);
+	void delete(Account account);
+	Account findById(Integer id);
+	Account findByAccountNo(String id);
 }

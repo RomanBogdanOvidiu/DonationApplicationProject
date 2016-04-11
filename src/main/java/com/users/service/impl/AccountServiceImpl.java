@@ -35,4 +35,22 @@ public class AccountServiceImpl implements AccountService{
 		public void deleteById(Integer id){
 			 accountRepository.delete(id);
 		}
+		
+		@Override
+		@Transactional
+		public Account findById(Integer id)
+		{
+			return accountRepository.findById(id);
+		}
+		@Override
+		@Transactional
+		public void delete(Account account){
+			 accountRepository.delete(account);
+		}
+
+		@Override
+		public Account findByAccountNo(String id) {
+		
+			return accountRepository.findByAccountNo(id);
+		}
 }

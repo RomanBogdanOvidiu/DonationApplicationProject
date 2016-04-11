@@ -1,5 +1,7 @@
 package com.users.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,25 +19,40 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 	@Autowired
 	private UserRoleRepository userRoleRepository;
-	
 
-	
-	//insert in users table
+	// insert in users table
 	@Override
 	@Transactional
 	public User insert(User u1) {
 		return userRepository.save(u1);
 	}
-	
-	
-	//insert in userrole table
+
+	// insert in userrole table
 	@Override
 	@Transactional
 	public UserRole insert2(UserRole u2) {
 
 		return userRoleRepository.save(u2);
 	}
-	
-	
+
+	// delete user
+	@Override
+	@Transactional
+	public void deleteUser(User u) {
+		userRepository.delete(u);
+	}
+
+	@Override
+	@Transactional
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
+
+	@Override
+	@Transactional
+	public List<User> findAll() {
+
+		return userRepository.findAll();
+	}
 
 }

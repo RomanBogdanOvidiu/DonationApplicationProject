@@ -7,7 +7,7 @@
 <html>
 <body>
 	<form:form method="post"
-		action="${pageContext.request.contextPath}/account/"
+		action="${pageContext.request.contextPath}/account/${account.client.id}"
 		modelAttribute="account" cssClass="form-horizontal">
 
 
@@ -21,7 +21,6 @@
 			<form:input path="date" cssClass="span3" cssErrorClass="error" />
 		</div>
 		
-
 
 		<input type="submit" class="btn" value="Submit">&nbsp; <a
 			href="${pageContext.request.contextPath}/account/${account.client.id}"></a>

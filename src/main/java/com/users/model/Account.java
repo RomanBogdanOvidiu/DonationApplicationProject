@@ -1,8 +1,7 @@
 package com.users.model;
 
-import java.sql.Date;
+import java.util.UUID;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,10 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Cascade;
-
-import com.users.model.Client;
 
 @Entity
 @Table(name = "account", catalog = "bank")
@@ -27,13 +22,14 @@ public class Account {
 	@Column(name = "id", unique = true, nullable = false, length = 45)
 	private int id;
 
+	private String accountNo = UUID.randomUUID().toString().replaceAll("-", "");;
+
 	private double amount;
 	@ManyToOne
 	@JoinColumn(name = "clientid")
 	private Client client;
-	
-	private int date;
 
+	private int date;
 
 	public int getDate() {
 		return date;
@@ -43,18 +39,15 @@ public class Account {
 		this.date = date;
 	}
 
-	
 	public Account() {
 	}
 
-	public Account( double amout, int id) {
+	public Account(double amout, int id) {
 		this.id = id;
 		this.amount = amout;
 
 	}
-	
 
-	
 	public int getId() {
 		return id;
 	}
@@ -74,15 +67,14 @@ public class Account {
 
 	public void withdraw(double withdrawAmount) {
 		assert amount > 0 : "Out of money";
-		amount -= withdrawAmount ;
+		amount -= withdrawAmount;
 	}
 
 	public void deposit(double depositAmount) {
 		amount += depositAmount;
 
 	}
-	
-	
+
 	public Client getClient() {
 		return client;
 	}
@@ -99,6 +91,15 @@ public class Account {
 			c.deposit(amt);
 		}
 
+	}
+
+	@Column(name = "AccountNo", unique = true, nullable = false, length = 10)
+	public String getAccountNo() {
+		return accountNo;
+	}
+
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
 	}
 
 }
