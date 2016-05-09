@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users", catalog = "bank")
+@Table(name = "users", catalog = "hospital")
 public class User {
 
 	private String username;
@@ -24,6 +24,16 @@ public class User {
 	private String password;
 	private boolean enabled;
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
+	
+	private String badRole;
+
+	public String getBadRole() {
+		return badRole;
+	}
+
+	public void setBadRole(String badRole) {
+		this.badRole = badRole;
+	}
 
 	public User() {
 	}
@@ -98,6 +108,7 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
 	
 	
 

@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page session="true"%>
+
+<c:import url="/WEB-INF/common/layout.jsp" charEncoding="UTF-8"> </c:import>
 <html>
 <head>
 <title>Login Page</title>
@@ -36,8 +38,6 @@
 </style>
 </head>
 <body onload='document.loginForm.username.focus();'>
-
-	<h1>Spring Security Login </h1>
 
 	<div id="login-box">
 

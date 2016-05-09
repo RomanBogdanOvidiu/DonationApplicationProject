@@ -28,7 +28,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @ComponentScan({ "com.*" })
 @EnableTransactionManagement
-@EnableJpaRepositories("com.users.dao")
+@EnableJpaRepositories("com.users.repository")
 @Import({ SecurityConfig.class })
 public class AppConfig {
 
@@ -54,7 +54,7 @@ public class AppConfig {
 
 		BasicDataSource ds = new BasicDataSource();
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://localhost:3306/bank");
+		ds.setUrl("jdbc:mysql://localhost:3306/hospital");
 		ds.setUsername("root");
 		ds.setPassword("B0gd@n94");
 		return ds;

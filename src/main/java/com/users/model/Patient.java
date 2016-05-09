@@ -15,8 +15,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "client", catalog = "bank")
-public class Client {
+@Table(name = "patient", catalog = "hospital")
+public class Patient {
 
 	@Id
 	@SequenceGenerator(name = "seq", initialValue = 1, allocationSize = 100)
@@ -28,19 +28,20 @@ public class Client {
 	private String lastName;
 	private String cnp;
 	private String address;
+	private String dateOfBirth;
 
 	@OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Account> acc = new ArrayList<Account>();
+	private List<Consultation> acc = new ArrayList<Consultation>();
 
 	// @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	// @LazyCollection(LazyCollectionOption.FALSE)
 	// private List<Bills> bill=new ArrayList<Bills>();
 	//
-	public Client() {
+	public Patient() {
 
 	}
 
-	public Client(int id, String firstName, String lastName, String address) {
+	public Patient(int id, String firstName, String lastName, String address) {
 
 		this.firstName = firstName;
 		this.id = id;
@@ -92,12 +93,20 @@ public class Client {
 		this.address = address;
 	}
 
-	public List<Account> getAcc() {
+	public List<Consultation> getAcc() {
 		return acc;
 	}
 
-	public void setAcc(List<Account> acc) {
+	public void setAcc(List<Consultation> acc) {
 		this.acc = acc;
+	}
+
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 }

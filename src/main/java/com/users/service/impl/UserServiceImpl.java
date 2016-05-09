@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.users.dao.UserRepository;
-import com.users.dao.UserRoleRepository;
 import com.users.model.User;
 import com.users.model.UserRole;
+import com.users.repository.UserRepository;
+import com.users.repository.UserRoleRepository;
 import com.users.service.UserService;
 
 @Service
@@ -54,5 +54,13 @@ public class UserServiceImpl implements UserService {
 
 		return userRepository.findAll();
 	}
+
+	@Override
+	public User findByBadRole(String role) {
+		
+		return userRepository.findByBadRole(role);
+	}
+	
+	
 
 }

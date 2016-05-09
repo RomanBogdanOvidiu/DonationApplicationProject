@@ -1,8 +1,8 @@
 <%@ page import="com.users.model.User"%>
-<%@ page import="com.users.model.Client"%>
+<%@ page import="com.users.model.Patient"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<c:import url="/WEB-INF/common/layout.jsp" charEncoding="UTF-8"> </c:import>
 <html>
 <body>
 
@@ -30,6 +30,11 @@
 		<div class="controls">
 			<form:input path="address" cssClass="span3" cssErrorClass="error" />
 		</div>
+		<label class="control-label" for="Date"><strong>Date of birth</strong></label>
+		<div class="controls">
+			<form:input path="dateOfBirth" cssClass="span3" cssErrorClass="error" />
+		</div>
+		
 		 <form:hidden path="id" />
 			<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />

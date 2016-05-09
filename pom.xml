@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com</groupId>
-	<artifactId>BankA1</artifactId>
+	<artifactId>HospitalA3</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>Bank project</name>
+	<name>HospitalA3 project</name>
 
 	<licenses>
 		<license>
@@ -206,10 +207,29 @@
 			<scope>provided</scope>
 		</dependency>
 
+<!-- bootsrap -->
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>3.2.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.webjars</groupId>
+					<artifactId>jquery</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 	</dependencies>
 
 	<build>
-		<finalName>BankA1</finalName>
+		<finalName>HospitalA3</finalName>
 		<plugins>
 
 			<plugin>
