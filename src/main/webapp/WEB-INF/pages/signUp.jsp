@@ -12,7 +12,7 @@
 	<div align="center">
 
 		<form:form method="post"
-			action="${pageContext.request.contextPath}/admin/signUp"
+			action="${pageContext.request.contextPath}/signUp"
 			modelAttribute="user" cssClass="form-horizontal">
 
 			<label class="control-label" for="username"><strong>Username</strong></label>
@@ -20,6 +20,13 @@
 				<form:input path="username" cssClass="span3" cssErrorClass="error" />
 
 			</div>
+
+			<label class="control-label" for="password"><strong>password</strong></label>
+			<div class="controls">
+				<form:input path="password" type="password" cssClass="span3"
+					cssErrorClass="error" />
+			</div>
+
 			<label class="control-label" for="firstName"><strong>FirstName</strong></label>
 			<div class="controls">
 				<form:input path="firstName" cssClass="span3" cssErrorClass="error" />
@@ -30,20 +37,23 @@
 				<form:input path="lastName" cssClass="span3" cssErrorClass="error" />
 
 			</div>
-			<label class="control-label" for="password"><strong>password</strong></label>
+
+			<label class="control-label" for="contactInfo"><strong>Contact
+					Information</strong></label>
 			<div class="controls">
-				<form:input path="password" type="password" cssClass="span3"
+				<form:input path="contactInfo" cssClass="span3"
 					cssErrorClass="error" />
+
 			</div>
 
-			<label class="control-label" for="badRole"><strong>Role</strong></label>
+			<label class="control-label" for="email"><strong>Email</strong></label>
 			<div class="controls">
-				<form:input path="badRole" cssClass="span3" cssErrorClass="error" />
-			</div>
+				<form:input path="email" cssClass="span3" cssErrorClass="error" />
 
+			</div>
 
 			<input type="submit" class="btn" value="Submit">&nbsp; <a
-				href="${pageContext.request.contextPath}/admin/signUp"></a>
+				href="${pageContext.request.contextPath}/signUp"></a>
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 
@@ -52,6 +62,6 @@
 
 
 	</div>
-	<a href='${pageContext.request.contextPath}/admin' class="btn btn-info">Back</a>
+	<a href='${pageContext.request.contextPath}/' class="btn btn-info">Back</a>
 </body>
 </html>

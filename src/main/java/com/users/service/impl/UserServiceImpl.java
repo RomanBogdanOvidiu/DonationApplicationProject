@@ -55,12 +55,4 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findAll();
 	}
 
-	@Override
-	public User findByBadRole(String role) {
-		
-		return userRepository.findByBadRole(role);
-	}
-	
-	
-
 }

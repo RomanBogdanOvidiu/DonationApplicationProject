@@ -99,10 +99,9 @@ html, body {
 					<ul class="nav navbar-nav">
 						<li class="active"><a
 							href='${pageContext.request.contextPath}/'>Home</a></li>
-						<li><a href='${pageContext.request.contextPath}/'>Poate ceva</a></li>
-						<li><a href='${pageContext.request.contextPath}/'>Poate altceva</a></li>
-						<li><a href='${pageContext.request.contextPath}/logout'>Log
-								out</a></li>
+						<li><a href='${pageContext.request.contextPath}/donation/${pageContext.request.userPrincipal.name}'>Make a donation</a></li>
+						<li><a href='${pageContext.request.contextPath}/signUp'>SignUp</a></li>
+						<li><a href='${pageContext.request.contextPath}/logout'>Login</a></li>
 
 					</ul>
 					<ul class="nav navbar-nav navbar-right">

@@ -1,6 +1,8 @@
 package com.users.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users", catalog = "hospital")
+@Table(name = "users", catalog = "donation")
 public class User {
 
 	private String username;
@@ -20,40 +22,40 @@ public class User {
 	private String firstName;
 
 	private String lastName;
-	
+
+	private String contactInfo;
+
 	private String password;
+
+	private String email;
+
 	private boolean enabled;
+
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
-	
-	private String badRole;
 
-	public String getBadRole() {
-		return badRole;
-	}
-
-	public void setBadRole(String badRole) {
-		this.badRole = badRole;
-	}
+	private List<Donation> donation = new ArrayList<Donation>();
 
 	public User() {
 	}
 
-	// public Integer incrementId(Integer id)
-	// {
-	// this.id=1+id;
-	// return id;
-	// }
 	public User(String username, String password, boolean enabled) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 	}
 
-	public User(String username, String password, boolean enabled, Set<UserRole> userRole) {
+	public String getContactInfo() {
+		return contactInfo;
+	}
+
+	public void setContactInfo(String contactInfo) {
+		this.contactInfo = contactInfo;
+	}
+
+	public User(String username, String password, boolean enabled, String badRole) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
-		this.userRole = userRole;
 	}
 
 	@Id
@@ -84,7 +86,7 @@ public class User {
 		this.enabled = enabled;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)
 	public Set<UserRole> getUserRole() {
 		return this.userRole;
 	}
@@ -108,8 +110,23 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
-	
-	
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)
+	public List<Donation> getDonation() {
+		return this.donation;
+	}
+
+	public void setDonation(List<Donation> donation) {
+		this.donation = donation;
+	}
+
+	@Column(name = "email", nullable = false)
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 }

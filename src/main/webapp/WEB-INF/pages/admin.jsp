@@ -14,8 +14,8 @@
 			<tr>
 				<th>UserName</th>
 				<th>FirstName</th>
-
 				<th>LastName</th>
+				<th>Email</th>
 
 				<th>&nbsp;</th>
 			</tr>
@@ -24,7 +24,7 @@
 					<td>${(user.username)}</td>
 					<td>${(user.firstName)}</td>
 					<td>${(user.lastName)}</td>
-					<td>${(user.badRole) }</td>
+					<td>${(user.email) }</td>
 
 					<td><a
 						href='${pageContext.request.contextPath}/admin/edituser/${user.username}'

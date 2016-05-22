@@ -9,37 +9,24 @@
 		<h1>Welcome !</h1>
 	</div>
 	
-		<sec:authorize access="hasRole('ROLE_DOCTOR')">
+		<sec:authorize access="hasRole('ROLE_USER')">
 		<div align="center">
 		
 				<h2>
 					User : ${pageContext.request.userPrincipal.name} 
 				</h2>
 		
-			<a href="${pageContext.request.contextPath}/clientlist"
-				class="btn btn-primary">Patient List</a>
-				<a href="${pageContext.request.contextPath}/notification"
-				class="btn btn-primary">Notification List</a>
+			<a href="${pageContext.request.contextPath}/user/donation/${pageContext.request.userPrincipal.name}"
+				class="btn btn-primary">Check Your Donations</a>
+				<a href="${pageContext.request.contextPath}/user/donation"
+				class="btn btn-primary">Donations List</a>
 		</div>
 		
 	
 
 	</sec:authorize>
 
-	<sec:authorize access="hasRole('ROLE_SECRETARY')">
-		<div align="center">
-			<c:if test="${pageContext.request.userPrincipal.name != null}">
-				<h2>
-					User : ${pageContext.request.userPrincipal.name}
-				</h2>
-			</c:if>
-			<a href="${pageContext.request.contextPath}/clientlist"
-				class="btn btn-primary">Patient List</a>
-		</div>
-		
 	
-
-	</sec:authorize>
 
 
 	<sec:authorize access="hasRole('ROLE_ADMIN') ">
@@ -52,7 +39,7 @@
 		</div>
 		<p>&nbsp;</p>
 		<div align="center">
-			<a href='${pageContext.request.contextPath}/admin'
+			<a href='${pageContext.request.contextPath}/admin/adm'
 				class="btn btn-primary">Admin Page</a>
 		</div>
 	</sec:authorize>
